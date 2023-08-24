@@ -15,8 +15,10 @@
 					<string>Default Configuration</string>
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-					<key>UISceneStoryboardFile</key>
-					<string>Main</string>
+					<key>Fonts privoded by application</key>
+					<array/>
+					<key></key>
+					<string>Lora-Italic-VariableFont_wght</string>
 				</dict>
 			</array>
 		</dict>
