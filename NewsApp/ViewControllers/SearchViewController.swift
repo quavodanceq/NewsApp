@@ -30,11 +30,10 @@ class SearchViewController: UIViewController {
         searchController.delegate = self
         searchController.searchResultsUpdater = self
         navigationItem.searchController?.searchBar.isHidden = false
-        navigationItem.hidesSearchBarWhenScrolling = false 
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchBar.searchTextField.textColor = .white
         searchController.searchBar.placeholder = "Search news"
         searchController.searchBar.searchTextField.attributedPlaceholder =  NSAttributedString.init(string: "Search news", attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
-        searchController.searchBar.tintColor = .white
-        searchController.searchBar.searchTextField.textColor = .white
         if let leftView = searchController.searchBar.searchTextField.leftView as? UIImageView {
             leftView.image = UIImage(named: "magnifyingglass")?.withRenderingMode(.alwaysTemplate)
                 leftView.tintColor = UIColor.white
