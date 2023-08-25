@@ -84,7 +84,9 @@ class NewsFeedViewController: UIViewController {
     }
     
     @objc private func searchButtonTapped() {
-        print(33333333333)
+        
+        let seachViewController = SearchViewController()
+        self.navigationController?.pushViewController(seachViewController, animated: true)
     }
     
 }

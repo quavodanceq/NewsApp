@@ -17,7 +17,7 @@ class FetchManager {
     func fetch(completion: @escaping([News]?) -> Void) {
         
         AF.request("https://newsdata.io/api/1/news?apikey=pub_281754adee3f2331df99714eeeca254ffceeb&q=pegasus&language=en").response { response in
-            print(response)
+            
             let decoder = JSONDecoder()
             let data = try? decoder.decode(Response.self, from: response.data!)
             if let news = data?.results {
@@ -26,5 +26,22 @@ class FetchManager {
             completion(nil)
         }
         
+    }
+    
+    func fetchWithSearch(searchText: String, completion: @escaping ([News]?) -> Void) {
+        
+        guard searchText != "" else { return }
+        AF.request("https://newsdata.io/api/1/news?apikey=pub_281754adee3f2331df99714eeeca254ffceeb&q=pegasus&language=en&q=\(searchText)").response { response in
+            print(response)
+            let decoder = JSONDecoder()
+            let data = try? decoder.decode(Response.self, from: response.data!)
+            if let news = data?.results {
+                print(data?.results)
+                completion(data?.results)
+            }
+            completion(nil)
+            
+        }
+
     }
 }
