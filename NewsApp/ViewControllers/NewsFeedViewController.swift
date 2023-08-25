@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController {
+class NewsFeedViewController: UIViewController {
     
     private let tableView = UITableView()
     
@@ -16,14 +16,13 @@ class ViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         
-        
-        
         tableView.snp.makeConstraints { make in
             make.height.equalTo(tableView.contentSize.height)
         }
     }
-
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         view.backgroundColor = .navBarBackgroundColor
         setupNavigationBar()
@@ -37,11 +36,9 @@ class ViewController: UIViewController {
             self.tableView.snp.updateConstraints { make in
                 make.height.equalTo(self.tableView.contentSize.height)
             }
-                
         }
-        
     }
-
+    
     private func setupNavigationBar() {
         
         let image = UIImage(named: "logo")
@@ -49,16 +46,16 @@ class ViewController: UIViewController {
         logoView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = logoView
         let appearance = UINavigationBarAppearance()
-                appearance.configureWithOpaqueBackground()
-                appearance.backgroundColor = UIColor.navBarBackgroundColor
-                appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-                navigationItem.standardAppearance = appearance
-                navigationItem.scrollEdgeAppearance = appearance
-                navigationItem.compactAppearance = appearance
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor.navBarBackgroundColor
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
+        navigationItem.compactAppearance = appearance
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.bullet.rectangle.fill"), style: .plain, target: self, action: #selector(newsSphereButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .black
+        navigationItem.leftBarButtonItem?.tintColor = .white
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchButtonTapped))
-        navigationItem.rightBarButtonItem?.tintColor = .black
+        navigationItem.rightBarButtonItem?.tintColor = .white
     }
     
     private func setupTableView() {
@@ -82,26 +79,6 @@ class ViewController: UIViewController {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     @objc private func newsSphereButtonTapped() {
         print(123123123)
     }
@@ -109,14 +86,15 @@ class ViewController: UIViewController {
     @objc private func searchButtonTapped() {
         print(33333333333)
     }
-
+    
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         news.count
+        
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -129,16 +107,20 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let news = news[indexPath.row]
+        let viewControllerToPresent = NewsViewController(news: news)
+        navigationController?.pushViewController(viewControllerToPresent, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-     
+        
         return 1000
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       
+        
         return UITableView.automaticDimension
     }
-    
-    
-    
 }
