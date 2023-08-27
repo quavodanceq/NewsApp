@@ -26,6 +26,8 @@ class NewsViewController: UIViewController {
     
     private let contentLabel = UILabel()
     
+    private let saveButton = UIBarButtonItem()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -67,6 +69,7 @@ class NewsViewController: UIViewController {
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.compactAppearance = appearance
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .plain, target: self, action: #selector(saveNews))
     }
     
     private func setupTitleLabel() {
@@ -113,6 +116,7 @@ class NewsViewController: UIViewController {
         contentLabel.sizeToFit()
     }
     
+    
     private func setupScrollView() {
         
         view.addSubview(scrollView)
@@ -125,6 +129,13 @@ class NewsViewController: UIViewController {
         contentView.addSubview(uiImageView)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(contentLabel)
+    }
+    
+    @objc private func saveNews() {
+        
+        SavedNewsManager.shared.add(news)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bookmark.fill"), style: .plain, target: self, action: #selector(saveNews))
+        
     }
     
     private func setupConstraints() {
@@ -192,6 +203,7 @@ class NewsViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-10)
             make.bottom.equalToSuperview()
         }
+        
     }
 }
 

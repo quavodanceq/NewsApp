@@ -61,6 +61,7 @@ class NewsCell: UITableViewCell {
         pubDateLabel.textColor = .white
     }
     
+    
     func setup() {
         setupImage()
         setupTitleLabel()
@@ -86,6 +87,8 @@ class NewsCell: UITableViewCell {
             make.trailing.equalToSuperview().offset(-10)
             make.bottom.equalToSuperview().offset(-10)
         }
+        
+       
     }
     
 }

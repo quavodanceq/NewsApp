@@ -59,3 +59,7 @@ class JSONNull: Codable, Hashable {
     }
 }
 
+extension News: Equatable {
+    
+    
+}
