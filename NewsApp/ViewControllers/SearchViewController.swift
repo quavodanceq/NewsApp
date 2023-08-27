@@ -101,4 +101,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         return UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let news = news[indexPath.row]
+        let viewControllerToPresent = NewsViewController(news: news)
+        navigationController?.pushViewController(viewControllerToPresent, animated: true)
+    }
+    
+    
 }

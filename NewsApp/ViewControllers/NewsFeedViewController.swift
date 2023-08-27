@@ -14,20 +14,17 @@ class NewsFeedViewController: UIViewController {
     
     private var news = [News]()
     
-    override func viewWillLayoutSubviews() {
-        
-        tableView.snp.makeConstraints { make in
-            make.height.equalTo(tableView.contentSize.height)
+    convenience init(category: NewsCategory) {
+        self.init()
+        FetchManager.shared.fetchCategory(category: category) { news in
+            guard let news = news else { return }
+            self.news = news
+            self.tableView.reloadData()
         }
     }
     
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        view.backgroundColor = .navBarBackgroundColor
-        setupNavigationBar()
-        setupTableView()
-        setupConstraints()
+    init() {
+        super.init(nibName: nil, bundle: nil)
         FetchManager.shared.fetch { news in
             
             guard let news = news else { return }
@@ -37,6 +34,27 @@ class NewsFeedViewController: UIViewController {
                 make.height.equalTo(self.tableView.contentSize.height)
             }
         }
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewWillLayoutSubviews() {
+        
+        tableView.snp.makeConstraints { make in
+            make.height.equalTo(tableView.contentSize.height)
+        }
+    }
+    
+    override func viewDidLoad() {
+        print(news)
+        super.viewDidLoad()
+        view.backgroundColor = .navBarBackgroundColor
+        setupNavigationBar()
+        setupTableView()
+        setupConstraints()
     }
     
     private func setupNavigationBar() {
@@ -80,7 +98,9 @@ class NewsFeedViewController: UIViewController {
     }
     
     @objc private func newsSphereButtonTapped() {
-        print(123123123)
+        
+        let categoriesViewController = CategoryViewController()
+        self.navigationController?.pushViewController(categoriesViewController, animated: true)
     }
     
     @objc private func searchButtonTapped() {
